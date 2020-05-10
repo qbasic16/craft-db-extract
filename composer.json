@@ -1,0 +1,44 @@
+{
+    "name": "pjanser/craft-db-extract",
+    "description": "A small helper Plugin for CraftCMS to download the DB over HTTP requiring authorization.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft-db-extract"
+    ],
+    "support": {
+        "docs": "https://github.com/qbasic16/craft-db-extract/blob/master/README.md",
+        "issues": "https://github.com/qbasic16/craft-db-extract/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "P. Janser",
+            "homepage": "https://github.com/qbasic16/"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+          "pjanser\\craftdbextract\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Craft DB Extract",
+        "handle": "craft-db-extract",
+        "developer": "P. Janser",
+        "developerUrl": "https://github.com/qbasic16/",
+        "documentationUrl": "https://github.com/qbasic16/craft-db-extract/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/qbasic16/craft-db-extract/master/CHANGELOG.md",
+        "class": "pjanser\\craftdbextract\\Craftdbextract"
+    }
+}
