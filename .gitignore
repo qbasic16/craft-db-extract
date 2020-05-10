@@ -1,5 +1,9 @@
 # CRAFT ENVIRONMENT
-.env
+.env*
+/craft
+/config
+/storage
+/web
 
 # COMPOSER
 /vendor

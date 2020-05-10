@@ -2,8 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
+The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project
+adheres to [Semantic Versioning](http://semver.org/).
 
-## 1.0.0-alpha.1 - 2020-05-06
+[Unreleased]: https://github.com/qbasic16/craft-db-extract/compare/1.0.0...staging
+[1.0.0]: https://github.com/qbasic16/craft-db-extract/tree/1.0.0
+
+## 1.0.0 - 2020-05-10
+
 ### Added
+
 - Initial release

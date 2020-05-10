@@ -74,15 +74,6 @@ class Craftdbextract extends Plugin
                 }
             }
         );
-
-        Craft::info(
-            Craft::t(
-                'craft-db-extract',
-                '{name} plugin loaded',
-                ['name' => $this->name]
-            ),
-            __METHOD__
-        );
     }
 
     public function getDb(): DbService

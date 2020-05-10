@@ -2,7 +2,7 @@
     "name": "pjanser/craft-db-extract",
     "description": "A small helper Plugin for CraftCMS to download the DB over HTTP requiring authorization.",
     "type": "craft-plugin",
-    "version": "1.0.0-alpha.1",
+    "version": "1.0.0",
     "keywords": [
         "craft",
         "cms",
@@ -23,6 +23,9 @@
     ],
     "require": {
         "craftcms/cms": "^3.0.0"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "4.*"
     },
     "autoload": {
         "psr-4": {

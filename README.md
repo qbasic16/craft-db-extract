@@ -24,15 +24,28 @@ To install the plugin, follow these instructions.
 
 ## craft-db-extract Overview
 
--Insert text here-
-
-## Configuring craft-db-extract
-
--Insert text here-
+This plugin makes a web controller action available to pull the database export.
 
 ## Using craft-db-extract
 
--Insert text here-
+The controller action requires an admin login. Provide your credentials in the **Authoirization** header
+with basic authentication.
+
+HTTP Header:
+```http
+Authorization: Basic xxxxxxxxxxxx
+```
+
+Pulling the database in *.sql format:
+```http
+GET YOUR_WEBSITE/actions/craft-db-extract/db-export
+```
+
+Pulling the database in *.sql.gz format:
+```http
+GET YOUR_WEBSITE/actions/craft-db-extract/db-export?compression=gzip
+```
+
 
 ## craft-db-extract Roadmap
 
