@@ -18,7 +18,7 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require qbasic16/craft-db-extract
+        composer require pjanser/craft-db-extract
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for craft-db-extract.
 
