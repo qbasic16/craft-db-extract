@@ -8,7 +8,9 @@ adheres to [Semantic Versioning](http://semver.org/).
 [Unreleased]: https://github.com/qbasic16/craft-db-extract/compare/1.0.0...staging
 [1.0.0]: https://github.com/qbasic16/craft-db-extract/tree/1.0.0
 
-## 1.0.0 - 2020-05-10
+## [Unreleased]
+
+## [1.0.0] - 2020-05-10
 
 ### Added
 
