@@ -55,6 +55,8 @@ GET YOUR_WEBSITE/actions/craft-db-extract/db-export?compression=gzip
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* Authorization with user token
+* Add different compressions
+* Configurable filename for response
 
 Brought to you by [P. Janser](https://github.com/qbasic16/)
