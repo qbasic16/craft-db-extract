@@ -35,6 +35,10 @@ HTTP Header:
 ```http
 Authorization: Basic xxxxxxxxxxxx
 ```
+**Tip:** If you experience **401 Unauthorized** eventhough you provide correct admin credentials, you can try to add the followin line to your `.htaccess`:
+```apache
+SetEnvIf Authorization (.+) HTTP_AUTHORIZATION=$0
+```
 
 Pulling the database in *.sql format:
 ```http
