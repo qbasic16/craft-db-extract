@@ -35,6 +35,10 @@ HTTP Header:
 ```http
 Authorization: Basic xxxxxxxxxxxx
 ```
+**Tip:** If you experience **401 Unauthorized** eventhough you provide correct admin credentials, you can try to add the following line to your `.htaccess`:
+```apache
+SetEnvIf Authorization (.+) HTTP_AUTHORIZATION=$0
+```
 
 Pulling the database in *.sql format:
 ```http
@@ -51,6 +55,8 @@ GET YOUR_WEBSITE/actions/craft-db-extract/db-export?compression=gzip
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* Authorization with user token
+* Add different compressions
+* Configurable filename for response
 
 Brought to you by [P. Janser](https://github.com/qbasic16/)
