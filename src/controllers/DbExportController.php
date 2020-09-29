@@ -15,7 +15,7 @@ class DbExportController extends Controller
     {
         $behaviors = parent::behaviors();
         $behaviors['basicAuth'] = [
-            'class' => HttpBasicAuth::className(),
+            'class' => HttpBasicAuth::class,
             'auth' => function ($username, $password) {
                 $user = Craft::$app->getUsers()->getUserByUsernameOrEmail($username);
                 // Delay randomly between 0 and 500 ms.
@@ -33,7 +33,7 @@ class DbExportController extends Controller
         return $behaviors;
     }
 
-    public function actionIndex(): string
+    public function actionIndex(): Response
     {
         $this->requireAdmin();
 
@@ -43,12 +43,6 @@ class DbExportController extends Controller
         $useGz = $request->getQueryParam('compression', '') === 'gzip';
 
         $response->format = Response::FORMAT_RAW;
-        $headers = $response->getHeaders();
-        if ($useGz) {
-            $headers->set('Content-Type', 'application/gzip');
-        } else {
-            $headers->set('Content-Type', 'text/plain');
-        }
         return Craftdbextract::$plugin->getDb()->dump($useGz);
     }
 }
