@@ -7,12 +7,6 @@ use craft\web\Response;
 
 class DbService extends Component
 {
-    const ZLIB_PARAMS = [
-        'level'  => 6,
-        'window' => 15,
-        'memory' => 9 // 1 - 9
-    ];
-
     /**
      * Creates a backup file and returns its data
      *
@@ -38,9 +32,21 @@ class DbService extends Component
                 $fpOut,
                 'zlib.deflate',
                 \STREAM_FILTER_WRITE,
-                self::ZLIB_PARAMS
+                [
+                    'level'  => 6,
+                    'window' => 15,
+                    'memory' => 9 // 1 - 9
+                ]
             );
         }
+
+        fseek($fpOut, 0, SEEK_END);
+        $fileSize = ftell($fpOut);
+
+        $response->headers->set('Content-Type', 'text/plain');
+        $response->format = Response::FORMAT_RAW;
+        $response->content = $fileSize;
+        return $response;
 
         // send file stream
         return $response->sendStreamAsFile(
