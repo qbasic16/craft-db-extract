@@ -25,7 +25,7 @@
         "craftcms/cms": "^3.0.0"
     },
     "require-dev": {
-        "vlucas/phpdotenv": "4.*"
+        "vlucas/phpdotenv": "^5"
     },
     "autoload": {
         "psr-4": {

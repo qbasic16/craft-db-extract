@@ -10,7 +10,7 @@ use yii\filters\auth\HttpBasicAuth;
 
 class DbExportController extends Controller
 {
-    protected $allowAnonymous = false;
+    protected $allowAnonymous = static::ALLOW_ANONYMOUS_NEVER;
 
     public function behaviors()
     {
@@ -19,18 +19,23 @@ class DbExportController extends Controller
             'class' => HttpBasicAuth::class,
             'auth' => function ($username, $password) {
                 $user = Craft::$app->getUsers()->getUserByUsernameOrEmail($username);
+
                 // Delay randomly between 0 and 500 ms.
                 usleep(random_int(0, 500000));
 
                 if (!$user || $user->password === null) {
                     // Delay again to match $user->authenticate()'s delay
-                    Craft::$app->getSecurity()->validatePassword('p@ss1w0rd', '$2y$13$nj9aiBeb7RfEfYP3Cum6Revyu14QelGGxwcnFUKXIrQUitSodEPRi');
+                    Craft::$app->getSecurity()->validatePassword(
+                        'p@ss1w0rd',
+                        '$2y$13$nj9aiBeb7RfEfYP3Cum6Revyu14QelGGxwcnFUKXIrQUitSodEPRi'
+                    );
                     return null;
                 }
 
                 return $user->authenticate($password) ? $user : null;
             }
         ];
+
         return $behaviors;
     }
 
@@ -38,18 +43,16 @@ class DbExportController extends Controller
     {
         $this->requireAdmin();
 
-        $request = Craft::$app->getRequest();
-        $response = Craft::$app->getResponse();
+        $useGz = $this->request->getQueryParam('compression', '') === 'gzip';
 
-        $useGz = $request->getQueryParam('compression', '') === 'gzip';
-
-        $response->format = Response::FORMAT_RAW;
+        $this->response->format = Response::FORMAT_RAW;
 
         [
             $fh,
             $filename,
             $mimeType
         ] = Craftdbextract::$plugin->getDb()->dump($useGz);
+
         if ($fh === false) {
             return $this->response->setStatusCode(500, 'Unable to get file handle');
         }
