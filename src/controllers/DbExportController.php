@@ -1,4 +1,5 @@
 <?php
+
 namespace pjanser\craftdbextract\controllers;
 
 use Craft;
@@ -43,6 +44,23 @@ class DbExportController extends Controller
         $useGz = $request->getQueryParam('compression', '') === 'gzip';
 
         $response->format = Response::FORMAT_RAW;
-        return Craftdbextract::$plugin->getDb()->dump($useGz);
+
+        [
+            $fh,
+            $filename,
+            $mimeType
+        ] = Craftdbextract::$plugin->getDb()->dump($useGz);
+        if ($fh === false) {
+            return $this->response->setStatusCode(500, 'Unable to get file handle');
+        }
+
+        // make sure we start the stream from the beginning
+        \rewind($fh);
+
+        return $this->response->sendStreamAsFile(
+            $fh,
+            $filename,
+            ['mimeType' => $mimeType]
+        );
     }
 }

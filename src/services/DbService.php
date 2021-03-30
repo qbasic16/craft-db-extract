@@ -1,37 +1,51 @@
 <?php
+
 namespace pjanser\craftdbextract\services;
 
 use Craft;
 use craft\base\Component;
-use craft\web\Response;
+use Exception;
 
 class DbService extends Component
 {
     /**
-     * Creates a backup file and returns its data
+     * Creates a backup file and returns its data as a binary resource
      *
-     * Writes raw SQL or GZIP-encoded SQL to the output
-     *
-     * @return void
+     * @param bool $useGz Use GZip compression?
+     * @return resource|false The open resource for reading (binary mode)
      */
-    public function dump($useGz = false): Response
+    public function dump(bool $useGz = false)
     {
-        $response = Craft::$app->getResponse();
         $db = Craft::$app->getDb();
 
-        $filePath = $db->backup();
+        try {
+            $filePath = $db->backup();
+            $fileName = \basename($filePath);
 
-        $fileNameOut = 'db.sql' . ($useGz ? '.gz' : '');
-        $mimeOut = $useGz ? 'application/gzip' : 'text/plain';
+            $fileNameOut = $fileName . ($useGz ? '.gz' : '');
+            $mimeOut = $useGz ? 'application/gzip' : 'text/plain';
 
-        // open stream
-        $fpOut = \fopen($filePath, 'rb');
+            // open DB backup from Craft in readonly & binary mode
+            $fh = \fopen($filePath, 'rb');
+
+            // unable to open backup file
+            if ($fh === false) {
+                throw new Exception('Unable to open file');
+            }
+        } catch (Exception $ex) {
+            return [
+                false, // resource handle for output
+                null, // filename
+                null // mimeType
+            ];
+        }
 
         if ($useGz) {
+            // attach gzip compression to stream
             \stream_filter_append(
-                $fpOut,
+                $fh,
                 'zlib.deflate',
-                \STREAM_FILTER_WRITE,
+                \STREAM_FILTER_READ,
                 [
                     'level'  => 6,
                     'window' => 15,
@@ -40,22 +54,10 @@ class DbService extends Component
             );
         }
 
-        fseek($fpOut, 0, SEEK_END);
-        $fileSize = ftell($fpOut);
-
-        $response->headers->set('Content-Type', 'text/plain');
-        $response->format = Response::FORMAT_RAW;
-        $response->content = $fileSize;
-        return $response;
-
-        // send file stream
-        return $response->sendStreamAsFile(
-            $fpOut,
-            $fileNameOut,
-            [
-                'mimeType' => $mimeOut,
-                'inline' => false
-            ]
-        );
+        return [
+            $fh, // resource handle for output
+            $fileNameOut, // filename
+            $mimeOut // mimeType
+        ];
     }
 }
