@@ -10,7 +10,7 @@ use yii\filters\auth\HttpBasicAuth;
 
 class DbExportController extends Controller
 {
-    protected $allowAnonymous = static::ALLOW_ANONYMOUS_NEVER;
+    protected $allowAnonymous = self::ALLOW_ANONYMOUS_NEVER;
 
     public function behaviors()
     {
