@@ -28,7 +28,7 @@ This plugin makes a web controller action available to pull the database export.
 
 ## Using craft-db-extract
 
-The controller action requires an admin login. Provide your credentials in the **Authoirization** header
+The controller action requires an admin login. Provide your credentials in the **Authorization** header
 with basic authentication.
 
 HTTP Header:
