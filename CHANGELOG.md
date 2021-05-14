@@ -10,6 +10,14 @@ adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Added Gzip as compression stream to lower memory profile
+
+### Changed
+
+- Upgraded composer dependencies to fix security vulnerabilities
+
 ## [1.0.0] - 2020-05-10
 
 ### Added

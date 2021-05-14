@@ -45,25 +45,25 @@ class DbExportController extends Controller
 
         $useGz = $this->request->getQueryParam('compression', '') === 'gzip';
 
-        $this->response->format = Response::FORMAT_RAW;
-
         [
             $fh,
+            $fsize,
+            $crc32,
             $filename,
-            $mimeType
+            $mimeType,
         ] = Craftdbextract::$plugin->getDb()->dump($useGz);
 
         if ($fh === false) {
             return $this->response->setStatusCode(500, 'Unable to get file handle');
         }
 
-        // make sure we start the stream from the beginning
-        \rewind($fh);
-
         return $this->response->sendStreamAsFile(
             $fh,
             $filename,
-            ['mimeType' => $mimeType]
+            [
+                // 'fileSize' => $fsize,
+                'mimeType' => $mimeType,
+            ]
         );
     }
 }
