@@ -1,6 +1,6 @@
 <?php
 
-namespace pjanser\craftdbextract\lib;
+namespace pjanser\craftdbextract\helpers;
 
 abstract class EncodingHelper
 {

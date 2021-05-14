@@ -5,7 +5,7 @@ namespace pjanser\craftdbextract\services;
 use Craft;
 use craft\base\Component;
 use Exception;
-use pjanser\craftdbextract\lib\Crc32Helper;
+use pjanser\craftdbextract\helpers\Crc32Helper;
 
 class DbService extends Component
 {

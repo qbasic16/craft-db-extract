@@ -1,4 +1,5 @@
 <?php
+
 /**
  * craft-db-extract plugin for Craft CMS 3.x
  *
@@ -41,7 +42,7 @@ class Craftdbextract extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.0-alpha.1';
+    public $schemaVersion = '1.0.0';
 
     /**
      * @var bool

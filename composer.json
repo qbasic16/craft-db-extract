@@ -2,7 +2,7 @@
   "name": "pjanser/craft-db-extract",
   "description": "A small helper Plugin for CraftCMS to download the DB over HTTP requiring authorization.",
   "type": "craft-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "keywords": [
     "craft",
     "cms",
